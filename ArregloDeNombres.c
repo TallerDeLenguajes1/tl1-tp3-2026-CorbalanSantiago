@@ -8,7 +8,8 @@
 //declaracion de funciones
 
 void MostrarPersonas(char *V[], int n);
-void buscarNombre(char *V[], char *palabra);
+void buscarNombrePorPalabra(char *V[], char *palabra);
+void buscarNombrePorId(char *V[], int id);
 
 //main 
 
@@ -31,15 +32,20 @@ int main()
     MostrarPersonas(V, cant_nombres);
     
     char palabraBusqueda[50]; // Buffer para la palabra
-    
     printf("\nbusqueda por palabra clave\n");
     printf("Ingrese la palabra o letras a buscar: ");
     
     fflush(stdin); 
     gets(palabraBusqueda);
-    buscarNombre(V, palabraBusqueda);
+    buscarNombrePorPalabra(V, palabraBusqueda);
+    
+    int idBusqueda;
+    printf("\nIngrese el ID: ");
+    scanf("%d", &idBusqueda);
+    buscarNombrePorId(V, idBusqueda);
+    
     //libero memoria
-    for (int i=0;i<cant_nombres;i++) 
+    for(int i=0;i<cant_nombres;i++) 
     {
         free(V[i]);
     }
@@ -57,7 +63,7 @@ void MostrarPersonas(char *V[], int n)
     }
 }
 
-void buscarNombre(char *V[], char *palabra)
+void buscarNombrePorPalabra(char *V[], char *palabra)
 {
     int encontrado=0; 
     for (int i = 0; i < 5; i++) 
@@ -72,5 +78,17 @@ void buscarNombre(char *V[], char *palabra)
     if (encontrado==0) 
     {
         printf("no se encontro el nombre\n");
+    }
+}
+
+void buscarNombrePorId(char *V[], int id) 
+{
+    if (id>0&&id<6) 
+    {
+        printf("Nombre en ID %d: %s\n", id, V[id-1]);
+    } 
+    else 
+    {
+        printf("no se encontro la persona\n");
     }
 }

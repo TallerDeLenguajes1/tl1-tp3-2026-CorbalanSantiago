@@ -1,0 +1,85 @@
+ignorado.txt
+
+# Creado por https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,c++
+# Editar en https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,c++
+
+### C++ ###
+# Requisitos previos
+*.d
+
+# Archivos objeto compilados
+*.slo
+*.lo
+*.o
+*.obj
+
+# Encabezados precompilados
+*.gch
+*.pch
+
+# Bibliotecas dinámicas compiladas
+*.entonces
+*.dylib
+*.dll
+
+# Archivos de módulo Fortran
+*.mod
+*.smod
+
+# Bibliotecas estáticas compiladas
+*.lai
+*.la
+*.a
+*.lib
+
+# Archivos ejecutables
+*.exe
+*.afuera
+*.app
+
+### Código de Visual Studio ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Historial local para Visual Studio Code
+.historia/
+
+# Extensiones de Visual Studio Code creadas
+*.vsix
+
+### Parche de VisualStudioCode ###
+# Ignorar todo el historial local de archivos
+.historia
+iónido
+
+### Windows ###
+# Archivos de caché de miniaturas de Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Archivo de volcado
+*.stackdump
+
+# Archivo de configuración de la carpeta
+[Dd]esktop.ini
+
+# Papelera de reciclaje utilizada en recursos compartidos de archivos
+$RECICLAJE.CONTENEDOR/
+
+# Archivos del instalador de Windows
+*.taxi
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Accesos directos de Windows
+*.lnk
+
+# Fin de https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,c++

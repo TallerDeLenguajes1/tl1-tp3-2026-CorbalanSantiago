@@ -8,41 +8,61 @@
 //declaracion de funciones
 
 void MostrarPersonas(char *V[], int n);
-void buscarNombrePorPalabra(char *V[], char *palabra);
 void buscarNombrePorId(char *V[], int id);
+int buscaNombrePorPalabra(char *V[], char *palabra); 
 
 //main 
 
 int main() 
 {
+    //parte 1
     char *V[cant_nombres];      //vector de punteros
     char Buff[max_buffer];      //variable auxiliar temporal
-    
     printf("Ingreso de Nombres\n");
-    
-    for (int i=0;i<cant_nombres;i++) 
+    for(int i=0;i<cant_nombres;i++) 
     {
         printf("Ingrese el nombre [%d]: ",i+1);
         gets(Buff);     //leo el nombre en el buffer temporal
         V[i]=(char*)malloc((strlen(Buff)+1)*sizeof(char));      //reservo memoria dinámica para el nombre + 1  (por el /0)
         strcpy(V[i], Buff);     //copio el buffer al bloque de memoria reservado
     }
-    
     printf("\nListado de Nombres\n\n");
     MostrarPersonas(V, cant_nombres);
     
-    char palabraBusqueda[50]; // Buffer para la palabra
-    printf("\nbusqueda por palabra clave\n");
-    printf("Ingrese la palabra o letras a buscar: ");
+    //interfaz de consulta
+    printf("\ndesea buscar un nombre por ID o por una palabra?\n");
+    printf("opcion 1 (buscar por ID)\n opcion 2 (buscar por palabra)\n");
+    int opcion;
+    do
+    {
+        printf("eliga la opcion (1 | 2): ");
+        scanf("%d",&opcion);
+    }while(opcion<1||opcion>2);
     
-    fflush(stdin); 
-    gets(palabraBusqueda);
-    buscarNombrePorPalabra(V, palabraBusqueda);
-    
-    int idBusqueda;
-    printf("\nIngrese el ID: ");
-    scanf("%d", &idBusqueda);
-    buscarNombrePorId(V, idBusqueda);
+    if(opcion==1)
+    {
+        int idBusqueda;
+        printf("\nIngrese el ID: ");
+        scanf("%d", &idBusqueda);
+        buscarNombrePorId(V, idBusqueda);
+    }
+    else
+    {
+        char palabraBusqueda[50];
+        printf("\nbusqueda por palabra clave\n");
+        printf("Ingrese la palabra o letras a buscar: ");
+        while ((getchar()) != '\n');
+        gets(palabraBusqueda);
+        int nombreEncontrado = buscaNombrePorPalabra(V, palabraBusqueda);
+        if(nombreEncontrado!=-1) 
+        {
+            printf("coincidencia encontrada: %s\n", V[nombreEncontrado]);
+        } 
+        else 
+        {
+            printf("no se encontro el valor buscado\n");
+        }
+    }
     
     //libero memoria
     for(int i=0;i<cant_nombres;i++) 
@@ -63,32 +83,26 @@ void MostrarPersonas(char *V[], int n)
     }
 }
 
-void buscarNombrePorPalabra(char *V[], char *palabra)
+int buscaNombrePorPalabra(char *V[], char *palabra) 
 {
-    int encontrado=0; 
-    for (int i = 0; i < 5; i++) 
+    for(int i=0;i<cant_nombres;i++) 
     {
-        if (strstr(V[i], palabra)!=NULL) 
+        if(strstr(V[i], palabra)!=NULL) 
         {
-            printf("Coincidencia encontrada: %s (ID: %d)\n", V[i], i+1);
-            encontrado = 1; 
-            break; // Sale del bucle
+            return i; 
         }
     }
-    if (encontrado==0) 
-    {
-        printf("no se encontro el nombre\n");
-    }
+    return -1;
 }
 
 void buscarNombrePorId(char *V[], int id) 
 {
-    if (id>0&&id<6) 
+    if(id>0&&id<6) 
     {
         printf("Nombre en ID %d: %s\n", id, V[id-1]);
     } 
     else 
     {
-        printf("no se encontro la persona\n");
+        printf("no se encontro el valor buscado\n");
     }
 }

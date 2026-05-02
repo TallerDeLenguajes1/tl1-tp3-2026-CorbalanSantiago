@@ -8,6 +8,7 @@
 //declaracion de funciones
 
 void MostrarPersonas(char *V[], int n);
+void buscarNombre(char *V[], int id);
 
 //main 
 
@@ -29,6 +30,11 @@ int main()
     printf("\nListado de Nombres\n\n");
     MostrarPersonas(V, cant_nombres);
     
+    int idBusqueda;
+    printf("\nIngrese el ID: ");
+    scanf("%d", &idBusqueda);
+    buscarNombre(V, idBusqueda);
+    
     //libero memoria
     for (int i=0;i<cant_nombres;i++) 
     {
@@ -45,5 +51,17 @@ void MostrarPersonas(char *V[], int n)
     for (int i=0;i<n;i++) 
     {
         printf("Persona %d: %s\n", i+1, V[i]);
+    }
+}
+
+void buscarNombre(char *V[], int id) 
+{
+    if (id>0&&id<6) 
+    {
+        printf("Nombre en ID %d: %s\n", id, V[id-1]);
+    } 
+    else 
+    {
+        printf("no se encontro la persona\n");
     }
 }

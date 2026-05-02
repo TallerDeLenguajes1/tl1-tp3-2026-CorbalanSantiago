@@ -8,6 +8,7 @@
 //declaracion de funciones
 
 void MostrarPersonas(char *V[], int n);
+void buscarNombre(char *V[], char *palabra);
 
 //main 
 
@@ -29,6 +30,14 @@ int main()
     printf("\nListado de Nombres\n\n");
     MostrarPersonas(V, cant_nombres);
     
+    char palabraBusqueda[50]; // Buffer para la palabra
+    
+    printf("\nbusqueda por palabra clave\n");
+    printf("Ingrese la palabra o letras a buscar: ");
+    
+    fflush(stdin); 
+    gets(palabraBusqueda);
+    buscarNombre(V, palabraBusqueda);
     //libero memoria
     for (int i=0;i<cant_nombres;i++) 
     {
@@ -42,8 +51,26 @@ int main()
 
 void MostrarPersonas(char *V[], int n) 
 {
-    for (int i=0;i<n;i++) 
+    for(int i=0;i<n;i++) 
     {
         printf("Persona %d: %s\n", i+1, V[i]);
+    }
+}
+
+void buscarNombre(char *V[], char *palabra)
+{
+    int encontrado=0; 
+    for (int i = 0; i < 5; i++) 
+    {
+        if (strstr(V[i], palabra)!=NULL) 
+        {
+            printf("Coincidencia encontrada: %s (ID: %d)\n", V[i], i+1);
+            encontrado = 1; 
+            break; // Sale del bucle
+        }
+    }
+    if (encontrado==0) 
+    {
+        printf("no se encontro el nombre\n");
     }
 }

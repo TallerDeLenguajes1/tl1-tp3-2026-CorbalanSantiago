@@ -3,7 +3,11 @@
 #include <string.h>
 #include <time.h>
 
+//arreglo
+
 char *TiposProductos[]={"Galletas","Snack","Cigarrillos","Caramelos","Bebidas"};
+
+//estructuras
 
 typedef struct  
 {
@@ -69,12 +73,12 @@ int main()
     }
     //v
     printf("\nresumen de preventa\n");
-    for(int i = 0; i < cantClientes; i++)
+    for(int i=0;i<cantClientes;i++)
     {
         float totalCliente = 0;
         printf("\ncliente: %s (ID: %d)\n", listaClientes[i].NombreCliente, listaClientes[i].ClienteID);
         printf("\n%-15s %-15s %-15s %-10s\n\n", "Producto", "Cantidad", "P. Unitario", "Subtotal");
-        for(int j = 0; j < listaClientes[i].CantidadProductosAPedir; j++)
+        for(int j=0;j<listaClientes[i].CantidadProductosAPedir;j++)
         {
             // iv) uso la función para calcular el costo
             float subtotal = calcularCostoTotal(listaClientes[i].Productos[j]);
@@ -84,7 +88,7 @@ int main()
         printf("\ntotal a pagar del cliente: %.2f\n\n",totalCliente);
     }
     //libero memoria
-    for(int i = 0; i < cantClientes; i++)
+    for(int i=0;i<cantClientes;i++)
     {
         free(listaClientes[i].NombreCliente);
         free(listaClientes[i].Productos);

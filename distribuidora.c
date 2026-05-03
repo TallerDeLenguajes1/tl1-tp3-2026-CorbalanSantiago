@@ -37,11 +37,15 @@ int main()
     srand(time(NULL)); 
     int cantClientes;
     char buff[100];
-    printf("Ingrese la cantidad de clientes a cargar: ");
-    scanf("%d", &cantClientes);
-    while ((getchar()) != '\n');
+    distribuidora listaClientes[100];
+    do
+    {
+        printf("Ingrese la cantidad de clientes a cargar(max 100): ");
+        scanf("%d", &cantClientes);
+        while ((getchar()) != '\n');
+    }while(cantClientes>100);
+
     //ii
-    distribuidora *listaClientes=(distribuidora*)malloc(cantClientes*sizeof(distribuidora));
     for(int i=0;i<cantClientes;i++)
     {
         listaClientes[i].ClienteID=i+1;
@@ -51,6 +55,7 @@ int main()
         listaClientes[i].NombreCliente=(char*)malloc((strlen(buff)+1)*sizeof(char));    //reserva de memoria dinamica para el nombre
         strcpy(listaClientes[i].NombreCliente,buff);
         printf("cliente: %s cargado exitoso\n",listaClientes[i].NombreCliente);
+        
         //iii
         listaClientes[i].CantidadProductosAPedir=rand()%5+1;        //entre 1 y 5
         listaClientes[i].Productos=(Producto*)malloc(listaClientes[i].CantidadProductosAPedir*sizeof(Producto));
@@ -71,6 +76,7 @@ int main()
             printf("se generaron %d productos para este cliente\n\n",listaClientes[i].CantidadProductosAPedir);
         }
     }
+
     //v
     printf("\nresumen de preventa\n");
     for(int i=0;i<cantClientes;i++)
@@ -93,11 +99,11 @@ int main()
         free(listaClientes[i].NombreCliente);
         free(listaClientes[i].Productos);
     }
-    free(listaClientes);
     return 0;
 }
 
 //desarrollo de funciones
+
 //iv
 float calcularCostoTotal(Producto p) 
 {
